@@ -12,48 +12,180 @@ export default function Calculator() {
 
   return (
     <section
-      className={`calculator relative flex h-screen w-screen justify-center bg-calculatorbackground ${theme}`}
+      className={`calculator relative flex h-screen w-screen bg-calculatorbackground ${theme} flex-col`}
     >
-      <button
-        onClick={toggleTheme}
-        className="mt-[16px] flex h-[32px] w-[72px] flex-shrink-0 items-start gap-3 overflow-hidden rounded-2xl bg-lightdarkbutton py-1 pr-2"
-      >
+      <div className="flex w-full justify-center">
+        <button
+          onClick={toggleTheme}
+          className="mb-[55px] mt-[16px] flex h-[32px] w-[72px] flex-shrink-0 items-start gap-3 overflow-hidden rounded-2xl bg-lightdarkbutton py-1 pr-2"
+        >
+          {theme === "dark" ? (
+            <div className="flex -translate-x-10 transition-transform duration-300 ease-in-out">
+              <Image
+                src="/circledark.svg"
+                alt="circle"
+                width={24}
+                height={24}
+                className="ml-[44px]"
+              />
+              <Image
+                src="/moon.svg"
+                alt="moon"
+                width={24}
+                height={24}
+                className="ml-[16px]"
+              />
+            </div>
+          ) : (
+            <div className="flex transition-transform duration-300 ease-in-out">
+              <Image
+                src="/sun.svg"
+                alt="sun"
+                width={24}
+                height={24}
+                className="ml-[4px]"
+              />
+              <Image
+                src="/circlelight.svg"
+                alt="circle"
+                width={24}
+                height={24}
+                className="ml-[16px]"
+              />
+            </div>
+          )}
+        </button>
+      </div>
+      <div className="flex w-full flex-col items-start gap-4 px-[20px]">
         {theme === "dark" ? (
-          <div className="flex -translate-x-10 transition-transform duration-300 ease-in-out">
-            <Image
-              src="/circledark.svg"
-              alt="circle"
-              width={24}
-              height={24}
-              className="ml-[44px]"
-            />
-            <Image
-              src="/moon.svg"
-              alt="moon"
-              width={24}
-              height={24}
-              className="ml-[16px]"
-            />
+          <div className="font-work-sans h-fit w-full self-stretch text-right text-[40px] font-light text-white opacity-40">
+            10000
           </div>
         ) : (
-          <div className="flex transition-transform duration-300 ease-in-out">
-            <Image
-              src="/sun.svg"
-              alt="sun"
-              width={24}
-              height={24}
-              className="ml-[4px]"
-            />
-            <Image
-              src="/circlelight.svg"
-              alt="circle"
-              width={24}
-              height={24}
-              className="ml-[16px]"
-            />
+          <div className="font-work-sans h-fit w-full self-stretch text-right text-[40px] font-light text-black opacity-40">
+            10000
           </div>
         )}
-      </button>
+        {theme === "dark" ? (
+          <div className="font-work-sans mb-[16px] self-stretch text-right text-[96px] font-light leading-[96px] text-white">
+            9000
+          </div>
+        ) : (
+          <div className="font-work-sans mb-[16px] self-stretch text-right text-[96px] font-light leading-[96px] text-black">
+            9000
+          </div>
+        )}
+        <div className="flex items-start gap-4 self-stretch">
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4E505F] px-3 py-3">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+              C
+            </span>
+          </button>
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4E505F] px-3 py-3">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+              ±
+            </span>
+          </button>
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4E505F] px-3 py-3">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+              %
+            </span>
+          </button>
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4B5EFC] px-3 py-3">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+              ÷
+            </span>
+          </button>
+        </div>
+        <div className="flex items-start gap-4 self-stretch">
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4E505F] px-3 py-3">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+              7
+            </span>
+          </button>
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4E505F] px-3 py-3">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+              8
+            </span>
+          </button>
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4E505F] px-3 py-3">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+              9
+            </span>
+          </button>
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4B5EFC] px-3 py-3">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+              ×
+            </span>
+          </button>
+        </div>
+        <div className="flex items-start gap-4 self-stretch">
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4E505F] px-3 py-3">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+              4
+            </span>
+          </button>
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4E505F] px-3 py-3">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+              5
+            </span>
+          </button>
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4E505F] px-3 py-3">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+              6
+            </span>
+          </button>
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4B5EFC] px-3 py-3">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+              -
+            </span>
+          </button>
+        </div>
+        <div className="flex items-start gap-4 self-stretch">
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4E505F] px-3 py-3">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+              1
+            </span>
+          </button>
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4E505F] px-3 py-3">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+              2
+            </span>
+          </button>
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4E505F] px-3 py-3">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+              3
+            </span>
+          </button>
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4B5EFC] px-3 py-3">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+              +
+            </span>
+          </button>
+        </div>
+        <div className="flex items-start gap-4 self-stretch">
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4E505F] px-3 py-3">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+              .
+            </span>
+          </button>
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4E505F] px-3 py-3">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+              0
+            </span>
+          </button>
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4E505F] px-3 py-3">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+              ⌫
+            </span>
+          </button>
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4B5EFC] px-3 py-3">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+              =
+            </span>
+          </button>
+        </div>
+      </div>
     </section>
   );
 }
