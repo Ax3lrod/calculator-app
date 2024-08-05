@@ -11,6 +11,9 @@ const config: Config = {
       colors: {
         calculatorbackground: "rgba(var(--calculatorbackground))",
         lightdarkbutton: "rgba(var(--lightdarkbutton))",
+        topkeypad: "rgba(var(--topkeypad))",
+        keypad: "rgba(var(--keypad))",
+        buttontext: "rgba(var(--buttontext))",
       },
       fontFamily: {
         worksans: ["Work Sans", "sans-serif"],

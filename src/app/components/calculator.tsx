@@ -76,111 +76,111 @@ export default function Calculator() {
           </div>
         )}
         <div className="flex items-start gap-4 self-stretch">
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4E505F] px-3 py-3">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-topkeypad px-3 py-3 hover:opacity-90">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
               C
             </span>
           </button>
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4E505F] px-3 py-3">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-topkeypad px-3 py-3 hover:opacity-90">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
               ±
             </span>
           </button>
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4E505F] px-3 py-3">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-topkeypad px-3 py-3 hover:opacity-90">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
               %
             </span>
           </button>
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4B5EFC] px-3 py-3">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4B5EFC] px-3 py-3 hover:opacity-90">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
               ÷
             </span>
           </button>
         </div>
         <div className="flex items-start gap-4 self-stretch">
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4E505F] px-3 py-3">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
               7
             </span>
           </button>
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4E505F] px-3 py-3">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
               8
             </span>
           </button>
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4E505F] px-3 py-3">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
               9
             </span>
           </button>
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4B5EFC] px-3 py-3">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4B5EFC] px-3 py-3 hover:opacity-90">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
               ×
             </span>
           </button>
         </div>
         <div className="flex items-start gap-4 self-stretch">
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4E505F] px-3 py-3">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
               4
             </span>
           </button>
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4E505F] px-3 py-3">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
               5
             </span>
           </button>
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4E505F] px-3 py-3">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
               6
             </span>
           </button>
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4B5EFC] px-3 py-3">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4B5EFC] px-3 py-3 hover:opacity-90">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
               -
             </span>
           </button>
         </div>
         <div className="flex items-start gap-4 self-stretch">
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4E505F] px-3 py-3">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
               1
             </span>
           </button>
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4E505F] px-3 py-3">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
               2
             </span>
           </button>
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4E505F] px-3 py-3">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
               3
             </span>
           </button>
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4B5EFC] px-3 py-3">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4B5EFC] px-3 py-3 hover:opacity-90">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
               +
             </span>
           </button>
         </div>
         <div className="flex items-start gap-4 self-stretch">
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4E505F] px-3 py-3">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
               .
             </span>
           </button>
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4E505F] px-3 py-3">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
               0
             </span>
           </button>
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4E505F] px-3 py-3">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
               ⌫
             </span>
           </button>
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4B5EFC] px-3 py-3">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-white">
+          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4B5EFC] px-3 py-3 hover:opacity-90">
+            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
               =
             </span>
           </button>

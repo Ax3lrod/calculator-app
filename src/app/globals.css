@@ -7,16 +7,25 @@
 .dark {
   --calculatorbackground: 23, 23, 28, 1;
   --lightdarkbutton: 46, 47, 56, 1;
+  --topkeypad: 78, 80, 95, 1;
+  --keypad: 46, 47, 56, 1;
+  --buttontext: 255, 255, 255, 1;
 }
 
 .light {
   --calculatorbackground: 241, 242, 243, 1;
   --lightdarkbutton: 255, 255, 255, 1;
+  --topkeypad: 210, 211, 218, 1;
+  --keypad: 255, 255, 255, 1;
+  --buttontext: 0, 0, 0, 1;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --calculatorbackground: 23, 23, 28, 1;
     --lightdarkbutton: 46, 47, 56, 1;
+    --topkeypad: 78, 80, 95, 1;
+    --keypad: 46, 47, 56, 1;
+    --buttontext: 255, 255, 255, 1;
   }
 }
