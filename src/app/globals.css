@@ -5,14 +5,17 @@
 
 .dark {
   --calculatorbackground: 23, 23, 28, 1;
+  --lightdarkbutton: 46, 47, 56, 1;
 }
 
 .light {
-  --calculatorbackground: 255, 255, 255, 1;
+  --calculatorbackground: 241, 242, 243, 1;
+  --lightdarkbutton: 255, 255, 255, 1;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --calculatorbackground: 23, 23, 28, 1;
+    --lightdarkbutton: 46, 47, 56, 1;
   }
 }

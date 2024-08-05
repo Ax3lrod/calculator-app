@@ -10,6 +10,7 @@ const config: Config = {
     extend: {
       colors: {
         calculatorbackground: "rgba(var(--calculatorbackground))",
+        lightdarkbutton: "rgba(var(--lightdarkbutton))",
       },
       fontFamily: {
         worksans: ["Work Sans", "sans-serif"],
