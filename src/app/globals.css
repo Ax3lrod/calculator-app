@@ -29,10 +29,3 @@
     --buttontext: 255, 255, 255, 1;
   }
 }
-
-.shrink-text-wrapper {
-  display: inline-block;
-  transform-origin: left center; /* Shrink from the right */
-  white-space: nowrap;
-  max-width: 100%;
-}

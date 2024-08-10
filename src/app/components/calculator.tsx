@@ -7,19 +7,25 @@ export default function Calculator() {
   const [theme, setTheme] = useState("dark");
   const [currentValue, setCurrentValue] = useState("");
   const [previousValue, setPreviousValue] = useState("");
-  const [operator, setOperator] = useState(null);
+  const [operator, setOperator] = useState<string | null>(null);
 
-  const textRef = useRef(null);
-  const containerRef = useRef(null);
+  const textRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const textElement = textRef.current;
-    const containerElement = containerRef.current;
-
     const updateScale = () => {
-      if (textElement.scrollWidth > containerElement.clientWidth) {
-        const scale = containerElement.clientWidth / textElement.scrollWidth;
+      const textElement = textRef.current;
+      const containerElement = containerRef.current;
+
+      if (!textElement || !containerElement) return;
+
+      const textWidth = textElement.scrollWidth;
+      const containerWidth = containerElement.clientWidth;
+
+      if (textWidth > containerWidth) {
+        const scale = containerWidth / textWidth;
         textElement.style.transform = `scale(${scale})`;
+        textElement.style.transformOrigin = "left";
       } else {
         textElement.style.transform = `scale(1)`;
       }
@@ -37,11 +43,11 @@ export default function Calculator() {
     setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
   };
 
-  const handleNumberClick = (value) => {
+  const handleNumberClick = (value: string) => {
     setCurrentValue(currentValue + value);
   };
 
-  const handleOperatorClick = (value) => {
+  const handleOperatorClick = (value: string) => {
     if (currentValue === "") return;
     if (previousValue !== "") {
       handleEqualClick();
@@ -157,9 +163,7 @@ export default function Calculator() {
           ref={containerRef}
           className={`font-work-sans mb-[16px] self-stretch text-right font-light 350:text-[64px] 350:leading-[64px] xs:text-[96px] xs:leading-[96px] ${theme === "dark" ? "text-white" : "text-black"}`}
         >
-          <div ref={textRef} className="shrink-text-wrapper">
-            {currentValue || ""}
-          </div>
+          <div ref={textRef}>{currentValue || ""}</div>
         </div>
         <div className="flex items-start self-stretch 350:gap-2 xs:gap-4">
           <button
@@ -189,7 +193,7 @@ export default function Calculator() {
                 height={32}
               />
             )}
-            <span className="font-work-sans flex hidden flex-shrink-0 flex-col justify-center text-center font-normal leading-[40px] text-buttontext 350:h-8 350:w-8 350:text-[21.3px] xs:h-12 xs:w-12 xs:text-[32px]">
+            <span className="font-work-sans hidden flex-shrink-0 flex-col justify-center text-center font-normal leading-[40px] text-buttontext 350:h-8 350:w-8 350:text-[21.3px] xs:h-12 xs:w-12 xs:text-[32px]">
               ±
             </span>
           </button>
@@ -348,7 +352,7 @@ export default function Calculator() {
                 height={32}
               />
             )}
-            <span className="font-work-sans flex hidden flex-shrink-0 flex-col justify-center text-center font-normal leading-[40px] text-buttontext 350:h-8 350:w-8 350:text-[21.3px] xs:h-12 xs:w-12 xs:text-[32px]">
+            <span className="font-work-sans hidden flex-shrink-0 flex-col justify-center text-center font-normal leading-[40px] text-buttontext 350:h-8 350:w-8 350:text-[21.3px] xs:h-12 xs:w-12 xs:text-[32px]">
               ⌫
             </span>
           </button>
