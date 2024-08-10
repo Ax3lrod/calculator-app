@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 
 export default function Calculator() {
@@ -8,6 +8,30 @@ export default function Calculator() {
   const [currentValue, setCurrentValue] = useState("");
   const [previousValue, setPreviousValue] = useState("");
   const [operator, setOperator] = useState(null);
+
+  const textRef = useRef(null);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const textElement = textRef.current;
+    const containerElement = containerRef.current;
+
+    const updateScale = () => {
+      if (textElement.scrollWidth > containerElement.clientWidth) {
+        const scale = containerElement.clientWidth / textElement.scrollWidth;
+        textElement.style.transform = `scale(${scale})`;
+      } else {
+        textElement.style.transform = `scale(1)`;
+      }
+    };
+
+    updateScale();
+    window.addEventListener("resize", updateScale);
+
+    return () => {
+      window.removeEventListener("resize", updateScale);
+    };
+  }, [currentValue]);
 
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
@@ -125,14 +149,17 @@ export default function Calculator() {
       </div>
       <div className="absolute bottom-0 flex w-screen flex-col items-start px-[20px] pb-[20px] 350:gap-2 xs:gap-4">
         <div
-          className={`font-work-sans h-fit w-full self-stretch text-right font-light 350:text-[26.6px] xs:text-[40px] ${theme === "dark" ? "text-white" : "text-black"} opacity-40`}
+          className={`font-work-sans h-fit w-full self-stretch overflow-hidden text-ellipsis text-right font-light 350:text-[26.6px] xs:text-[40px] ${theme === "dark" ? "text-white" : "text-black"} opacity-40`}
         >
           {previousValue} {operator}
         </div>
         <div
+          ref={containerRef}
           className={`font-work-sans mb-[16px] self-stretch text-right font-light 350:text-[64px] 350:leading-[64px] xs:text-[96px] xs:leading-[96px] ${theme === "dark" ? "text-white" : "text-black"}`}
         >
-          {currentValue || ""}
+          <div ref={textRef} className="shrink-text-wrapper">
+            {currentValue || ""}
+          </div>
         </div>
         <div className="flex items-start self-stretch 350:gap-2 xs:gap-4">
           <button
@@ -147,7 +174,22 @@ export default function Calculator() {
             onClick={handleSignChangeClick}
             className="flex flex-1 flex-col items-center justify-center rounded-3xl bg-topkeypad px-3 py-3 hover:opacity-90 350:h-[48px] xs:h-[72px]"
           >
-            <span className="font-work-sans flex flex-shrink-0 flex-col justify-center text-center font-normal leading-[40px] text-buttontext 350:h-8 350:w-8 350:text-[21.3px] xs:h-12 xs:w-12 xs:text-[32px]">
+            {theme === "dark" ? (
+              <Image
+                src="/plusminuslight.svg"
+                alt="plusminus"
+                width={32}
+                height={32}
+              />
+            ) : (
+              <Image
+                src="/plusminusdark.svg"
+                alt="plusminus"
+                width={32}
+                height={32}
+              />
+            )}
+            <span className="font-work-sans flex hidden flex-shrink-0 flex-col justify-center text-center font-normal leading-[40px] text-buttontext 350:h-8 350:w-8 350:text-[21.3px] xs:h-12 xs:w-12 xs:text-[32px]">
               ±
             </span>
           </button>
@@ -291,7 +333,22 @@ export default function Calculator() {
             onClick={handleBackspaceClick}
             className="flex flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90 350:h-[48px] xs:h-[72px]"
           >
-            <span className="font-work-sans flex flex-shrink-0 flex-col justify-center text-center font-normal leading-[40px] text-buttontext 350:h-8 350:w-8 350:text-[21.3px] xs:h-12 xs:w-12 xs:text-[32px]">
+            {theme === "dark" ? (
+              <Image
+                src="/deletebuttonlight.svg"
+                alt="delete"
+                width={32}
+                height={32}
+              />
+            ) : (
+              <Image
+                src="/deletebuttondark.svg"
+                alt="delete"
+                width={32}
+                height={32}
+              />
+            )}
+            <span className="font-work-sans flex hidden flex-shrink-0 flex-col justify-center text-center font-normal leading-[40px] text-buttontext 350:h-8 350:w-8 350:text-[21.3px] xs:h-12 xs:w-12 xs:text-[32px]">
               ⌫
             </span>
           </button>
