@@ -5,14 +5,81 @@ import Image from "next/image";
 
 export default function Calculator() {
   const [theme, setTheme] = useState("dark");
+  const [currentValue, setCurrentValue] = useState("");
+  const [previousValue, setPreviousValue] = useState("");
+  const [operator, setOperator] = useState(null);
 
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
   };
 
+  const handleNumberClick = (value) => {
+    setCurrentValue(currentValue + value);
+  };
+
+  const handleOperatorClick = (value) => {
+    if (currentValue === "") return;
+    if (previousValue !== "") {
+      handleEqualClick();
+    }
+    setOperator(value);
+    setPreviousValue(currentValue);
+    setCurrentValue("");
+  };
+
+  const handleClearClick = () => {
+    setCurrentValue("");
+    setPreviousValue("");
+    setOperator(null);
+  };
+
+  const handleSignChangeClick = () => {
+    if (currentValue === "") return;
+    setCurrentValue(String(-parseFloat(currentValue)));
+  };
+
+  const handlePercentageClick = () => {
+    if (currentValue === "") return;
+    setCurrentValue(String(parseFloat(currentValue) / 100));
+  };
+
+  const handleBackspaceClick = () => {
+    setCurrentValue(currentValue.slice(0, -1));
+  };
+
+  const handleEqualClick = () => {
+    if (currentValue === "" || previousValue === "" || operator === null)
+      return;
+
+    let result;
+    const prev = parseFloat(previousValue);
+    const curr = parseFloat(currentValue);
+
+    switch (operator) {
+      case "+":
+        result = prev + curr;
+        break;
+      case "-":
+        result = prev - curr;
+        break;
+      case "×":
+        result = prev * curr;
+        break;
+      case "÷":
+        result = prev / curr;
+        break;
+      default:
+        return;
+    }
+
+    setCurrentValue(String(result));
+    setPreviousValue("");
+    setOperator(null);
+  };
+
   return (
     <section
-      className={`calculator relative flex h-screen w-screen bg-calculatorbackground ${theme} flex-col`}
+      className={`calculator relative flex h-screen w-screen bg-calculatorbackground ${theme} flex-col overflow-hidden`}
     >
       <div className="flex w-full justify-center">
         <button
@@ -56,131 +123,183 @@ export default function Calculator() {
           )}
         </button>
       </div>
-      <div className="flex w-full flex-col items-start gap-4 px-[20px]">
-        {theme === "dark" ? (
-          <div className="font-work-sans h-fit w-full self-stretch text-right text-[40px] font-light text-white opacity-40">
-            10000
-          </div>
-        ) : (
-          <div className="font-work-sans h-fit w-full self-stretch text-right text-[40px] font-light text-black opacity-40">
-            10000
-          </div>
-        )}
-        {theme === "dark" ? (
-          <div className="font-work-sans mb-[16px] self-stretch text-right text-[96px] font-light leading-[96px] text-white">
-            9000
-          </div>
-        ) : (
-          <div className="font-work-sans mb-[16px] self-stretch text-right text-[96px] font-light leading-[96px] text-black">
-            9000
-          </div>
-        )}
-        <div className="flex items-start gap-4 self-stretch">
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-topkeypad px-3 py-3 hover:opacity-90">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
+      <div className="absolute bottom-0 flex w-screen flex-col items-start px-[20px] pb-[20px] 350:gap-2 xs:gap-4">
+        <div
+          className={`font-work-sans h-fit w-full self-stretch text-right font-light 350:text-[26.6px] xs:text-[40px] ${theme === "dark" ? "text-white" : "text-black"} opacity-40`}
+        >
+          {previousValue} {operator}
+        </div>
+        <div
+          className={`font-work-sans mb-[16px] self-stretch text-right font-light 350:text-[64px] 350:leading-[64px] xs:text-[96px] xs:leading-[96px] ${theme === "dark" ? "text-white" : "text-black"}`}
+        >
+          {currentValue || ""}
+        </div>
+        <div className="flex items-start self-stretch 350:gap-2 xs:gap-4">
+          <button
+            onClick={handleClearClick}
+            className="flex flex-1 flex-col items-center justify-center rounded-3xl bg-topkeypad px-3 py-3 hover:opacity-90 350:h-[48px] xs:h-[72px]"
+          >
+            <span className="font-work-sans flex flex-shrink-0 flex-col justify-center text-center font-normal leading-[40px] text-buttontext 350:h-8 350:w-8 350:text-[21.3px] xs:h-12 xs:w-12 xs:text-[32px]">
               C
             </span>
           </button>
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-topkeypad px-3 py-3 hover:opacity-90">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
+          <button
+            onClick={handleSignChangeClick}
+            className="flex flex-1 flex-col items-center justify-center rounded-3xl bg-topkeypad px-3 py-3 hover:opacity-90 350:h-[48px] xs:h-[72px]"
+          >
+            <span className="font-work-sans flex flex-shrink-0 flex-col justify-center text-center font-normal leading-[40px] text-buttontext 350:h-8 350:w-8 350:text-[21.3px] xs:h-12 xs:w-12 xs:text-[32px]">
               ±
             </span>
           </button>
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-topkeypad px-3 py-3 hover:opacity-90">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
+          <button
+            onClick={handlePercentageClick}
+            className="flex flex-1 flex-col items-center justify-center rounded-3xl bg-topkeypad px-3 py-3 hover:opacity-90 350:h-[48px] xs:h-[72px]"
+          >
+            <span className="font-work-sans flex flex-shrink-0 flex-col justify-center text-center font-normal leading-[40px] text-buttontext 350:h-8 350:w-8 350:text-[21.3px] xs:h-12 xs:w-12 xs:text-[32px]">
               %
             </span>
           </button>
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4B5EFC] px-3 py-3 hover:opacity-90">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
+          <button
+            onClick={() => handleOperatorClick("÷")}
+            className="flex flex-1 flex-col items-center justify-center rounded-3xl bg-[#4B5EFC] px-3 py-3 hover:opacity-90 350:h-[48px] xs:h-[72px]"
+          >
+            <span className="font-work-sans flex flex-shrink-0 flex-col justify-center text-center font-normal leading-[40px] text-buttontext 350:h-8 350:w-8 350:text-[21.3px] xs:h-12 xs:w-12 xs:text-[32px]">
               ÷
             </span>
           </button>
         </div>
-        <div className="flex items-start gap-4 self-stretch">
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
+        <div className="flex items-start self-stretch 350:gap-2 xs:gap-4">
+          <button
+            onClick={() => handleNumberClick("7")}
+            className="flex flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90 350:h-[48px] xs:h-[72px]"
+          >
+            <span className="font-work-sans flex flex-shrink-0 flex-col justify-center text-center font-normal leading-[40px] text-buttontext 350:h-8 350:w-8 350:text-[21.3px] xs:h-12 xs:w-12 xs:text-[32px]">
               7
             </span>
           </button>
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
+          <button
+            onClick={() => handleNumberClick("8")}
+            className="flex flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90 350:h-[48px] xs:h-[72px]"
+          >
+            <span className="font-work-sans flex flex-shrink-0 flex-col justify-center text-center font-normal leading-[40px] text-buttontext 350:h-8 350:w-8 350:text-[21.3px] xs:h-12 xs:w-12 xs:text-[32px]">
               8
             </span>
           </button>
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
+          <button
+            onClick={() => handleNumberClick("9")}
+            className="flex flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90 350:h-[48px] xs:h-[72px]"
+          >
+            <span className="font-work-sans flex flex-shrink-0 flex-col justify-center text-center font-normal leading-[40px] text-buttontext 350:h-8 350:w-8 350:text-[21.3px] xs:h-12 xs:w-12 xs:text-[32px]">
               9
             </span>
           </button>
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4B5EFC] px-3 py-3 hover:opacity-90">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
+          <button
+            onClick={() => handleOperatorClick("×")}
+            className="flex flex-1 flex-col items-center justify-center rounded-3xl bg-[#4B5EFC] px-3 py-3 hover:opacity-90 350:h-[48px] xs:h-[72px]"
+          >
+            <span className="font-work-sans flex flex-shrink-0 flex-col justify-center text-center font-normal leading-[40px] text-buttontext 350:h-8 350:w-8 350:text-[21.3px] xs:h-12 xs:w-12 xs:text-[32px]">
               ×
             </span>
           </button>
         </div>
-        <div className="flex items-start gap-4 self-stretch">
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
+        <div className="flex items-start self-stretch 350:gap-2 xs:gap-4">
+          <button
+            onClick={() => handleNumberClick("4")}
+            className="flex flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90 350:h-[48px] xs:h-[72px]"
+          >
+            <span className="font-work-sans flex flex-shrink-0 flex-col justify-center text-center font-normal leading-[40px] text-buttontext 350:h-8 350:w-8 350:text-[21.3px] xs:h-12 xs:w-12 xs:text-[32px]">
               4
             </span>
           </button>
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
+          <button
+            onClick={() => handleNumberClick("5")}
+            className="flex flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90 350:h-[48px] xs:h-[72px]"
+          >
+            <span className="font-work-sans flex flex-shrink-0 flex-col justify-center text-center font-normal leading-[40px] text-buttontext 350:h-8 350:w-8 350:text-[21.3px] xs:h-12 xs:w-12 xs:text-[32px]">
               5
             </span>
           </button>
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
+          <button
+            onClick={() => handleNumberClick("6")}
+            className="flex flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90 350:h-[48px] xs:h-[72px]"
+          >
+            <span className="font-work-sans flex flex-shrink-0 flex-col justify-center text-center font-normal leading-[40px] text-buttontext 350:h-8 350:w-8 350:text-[21.3px] xs:h-12 xs:w-12 xs:text-[32px]">
               6
             </span>
           </button>
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4B5EFC] px-3 py-3 hover:opacity-90">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
+          <button
+            onClick={() => handleOperatorClick("-")}
+            className="flex flex-1 flex-col items-center justify-center rounded-3xl bg-[#4B5EFC] px-3 py-3 hover:opacity-90 350:h-[48px] xs:h-[72px]"
+          >
+            <span className="font-work-sans flex flex-shrink-0 flex-col justify-center text-center font-normal leading-[40px] text-buttontext 350:h-8 350:w-8 350:text-[21.3px] xs:h-12 xs:w-12 xs:text-[32px]">
               -
             </span>
           </button>
         </div>
-        <div className="flex items-start gap-4 self-stretch">
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
+        <div className="flex items-start self-stretch 350:gap-2 xs:gap-4">
+          <button
+            onClick={() => handleNumberClick("1")}
+            className="flex flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90 350:h-[48px] xs:h-[72px]"
+          >
+            <span className="font-work-sans flex flex-shrink-0 flex-col justify-center text-center font-normal leading-[40px] text-buttontext 350:h-8 350:w-8 350:text-[21.3px] xs:h-12 xs:w-12 xs:text-[32px]">
               1
             </span>
           </button>
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
+          <button
+            onClick={() => handleNumberClick("2")}
+            className="flex flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90 350:h-[48px] xs:h-[72px]"
+          >
+            <span className="font-work-sans flex flex-shrink-0 flex-col justify-center text-center font-normal leading-[40px] text-buttontext 350:h-8 350:w-8 350:text-[21.3px] xs:h-12 xs:w-12 xs:text-[32px]">
               2
             </span>
           </button>
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
+          <button
+            onClick={() => handleNumberClick("3")}
+            className="flex flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90 350:h-[48px] xs:h-[72px]"
+          >
+            <span className="font-work-sans flex flex-shrink-0 flex-col justify-center text-center font-normal leading-[40px] text-buttontext 350:h-8 350:w-8 350:text-[21.3px] xs:h-12 xs:w-12 xs:text-[32px]">
               3
             </span>
           </button>
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4B5EFC] px-3 py-3 hover:opacity-90">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
+          <button
+            onClick={() => handleOperatorClick("+")}
+            className="flex flex-1 flex-col items-center justify-center rounded-3xl bg-[#4B5EFC] px-3 py-3 hover:opacity-90 350:h-[48px] xs:h-[72px]"
+          >
+            <span className="font-work-sans flex flex-shrink-0 flex-col justify-center text-center font-normal leading-[40px] text-buttontext 350:h-8 350:w-8 350:text-[21.3px] xs:h-12 xs:w-12 xs:text-[32px]">
               +
             </span>
           </button>
         </div>
-        <div className="flex items-start gap-4 self-stretch">
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
+        <div className="flex items-start self-stretch 350:gap-2 xs:gap-4">
+          <button
+            onClick={() => handleNumberClick(".")}
+            className="flex flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90 350:h-[48px] xs:h-[72px]"
+          >
+            <span className="font-work-sans flex flex-shrink-0 flex-col justify-center text-center font-normal leading-[40px] text-buttontext 350:h-8 350:w-8 350:text-[21.3px] xs:h-12 xs:w-12 xs:text-[32px]">
               .
             </span>
           </button>
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
+          <button
+            onClick={() => handleNumberClick("0")}
+            className="flex flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90 350:h-[48px] xs:h-[72px]"
+          >
+            <span className="font-work-sans flex flex-shrink-0 flex-col justify-center text-center font-normal leading-[40px] text-buttontext 350:h-8 350:w-8 350:text-[21.3px] xs:h-12 xs:w-12 xs:text-[32px]">
               0
             </span>
           </button>
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
+          <button
+            onClick={handleBackspaceClick}
+            className="flex flex-1 flex-col items-center justify-center rounded-3xl bg-keypad px-3 py-3 hover:opacity-90 350:h-[48px] xs:h-[72px]"
+          >
+            <span className="font-work-sans flex flex-shrink-0 flex-col justify-center text-center font-normal leading-[40px] text-buttontext 350:h-8 350:w-8 350:text-[21.3px] xs:h-12 xs:w-12 xs:text-[32px]">
               ⌫
             </span>
           </button>
-          <button className="flex h-[72px] flex-1 flex-col items-center justify-center rounded-3xl bg-[#4B5EFC] px-3 py-3 hover:opacity-90">
-            <span className="font-work-sans flex h-12 w-12 flex-shrink-0 flex-col justify-center text-center text-[32px] font-normal leading-[40px] text-buttontext">
+          <button
+            onClick={handleEqualClick}
+            className="flex flex-1 flex-col items-center justify-center rounded-3xl bg-[#4B5EFC] px-3 py-3 hover:opacity-90 350:h-[48px] xs:h-[72px]"
+          >
+            <span className="font-work-sans flex flex-shrink-0 flex-col justify-center text-center font-normal leading-[40px] text-buttontext 350:h-8 350:w-8 350:text-[21.3px] xs:h-12 xs:w-12 xs:text-[32px]">
               =
             </span>
           </button>
